@@ -2,7 +2,8 @@ import {
   GET_TOP_HEADLINES_SUCCESS,
   GET_TOP_HEADLINES_REQUEST,
   BUSINESS_NEWS,
-  TECHNOLOGY_NEWS
+  TECHNOLOGY_NEWS,
+  SEARCH_NEWS
 } from "./actionTypes";
 import axios from "axios";
 
@@ -30,7 +31,7 @@ export const getTopHeadlines = (payload) => (dispatch) => {
       "http://newsapi.org/v2/top-headlines?country=us&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43"
     )
     .then((res) => res.data)
-    .then((res) => dispatch(getTopHeadlinesSuccess(res.articles)))
+    .then((res) => dispatch(getTopHeadlinesSuccess(res.articles)));
 };
 
 //function to get business news
@@ -47,22 +48,39 @@ export const businessNews = () => (dispatch) => {
       "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43"
     )
     .then((res) => res.data)
-    .then((res) => dispatch(businessNewsSuccess(res.articles)))
+    .then((res) => dispatch(businessNewsSuccess(res.articles)));
 };
 
 //function to get technology news
 export const technologySuccess = (payload) => {
-    return {
-      type: TECHNOLOGY_NEWS,
-      payload,
-    };
+  return {
+    type: TECHNOLOGY_NEWS,
+    payload,
   };
-  
-  export const technologyNews = () => (dispatch) => {
-    axios
-      .get(
-        "http://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43"
-      )
-      .then((res) => res.data)
-      .then((res) => dispatch(technologySuccess(res.articles)));
+};
+
+export const technologyNews = () => (dispatch) => {
+  axios
+    .get(
+      "http://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43"
+    )
+    .then((res) => res.data)
+    .then((res) => dispatch(technologySuccess(res.articles)));
+};
+
+//function to serach using query
+export const searchNewsSuccess = (payload) => {
+  return {
+    type: SEARCH_NEWS,
+    payload,
   };
+};
+
+export const searchNews = (value, date) => (dispatch) => {
+  axios
+    .get(
+      `http://newsapi.org/v2/everything?q=${value}&from=${date}&sortBy=publishedAt&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43`
+    )
+    .then((res) => res.data)
+    .then((res) => dispatch(searchNewsSuccess(res.articles)));
+};

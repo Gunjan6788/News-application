@@ -39,4 +39,5 @@
 
 .backgroundColor {
   background-color: #e8f5e9;
+  min-height: 100vh;
 }

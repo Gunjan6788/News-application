@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { uuid } from "uuidv4";
 import NewsCard from "../Component/NewsCard";
 import Pagination from "../Component/Pagination";
+import moment from "moment";
 
 class Technology extends Component {
   constructor(props) {
@@ -22,8 +23,8 @@ class Technology extends Component {
 
   render() {
     const { technology } = this.props;
-
     const { curr_page } = this.state;
+    let currDate = new Date();
 
     let per_page = 8,
       start_index = per_page * (curr_page - 1),
@@ -47,6 +48,19 @@ class Technology extends Component {
                     title={ele.title}
                     url={ele.url}
                     urlToImage={ele.urlToImage}
+                    date={moment
+                      .utc(
+                        moment(
+                          moment(currDate).format("hh:mm:ss a"),
+                          "HH:mm:ss"
+                        ).diff(
+                          moment(
+                            moment(ele.publishedAt).format("hh:mm:ss a"),
+                            "HH:mm:ss"
+                          )
+                        )
+                      )
+                      .format("hh")}
                   />
                 </div>
               ))}

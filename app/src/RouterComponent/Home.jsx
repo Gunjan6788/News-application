@@ -6,12 +6,13 @@ import NewsCard from "../Component/NewsCard";
 import { uuid } from "uuidv4";
 import Carousel from "react-elastic-carousel";
 import style from "./Home.module.css";
+import HomeSideBarNews from "../Component/HomeSideBarNews";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
   { width: 768, itemsToShow: 4 },
-  { width: 1200, itemsToShow: 4 },
+  { width: 1200, itemsToShow: 5 },
 ];
 
 class Home extends Component {
@@ -19,7 +20,7 @@ class Home extends Component {
     let { getTopHeadlines, businessNews, technologyNews } = this.props;
     getTopHeadlines();
     businessNews();
-    technologyNews()
+    technologyNews();
   }
 
   render() {
@@ -71,7 +72,11 @@ class Home extends Component {
                       className="col-lg-4 col-md-6 col-12 mb-3 border-bottom border-right"
                       key={uuid()}
                     >
-                      <a href={ele.url} rel="noopener noreferrer" target="_blank">
+                      <a
+                        href={ele.url}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
                         <p
                           className={`font-weight-bolder text-justify mr-2 ${style.newsTextSize}`}
                         >
@@ -87,23 +92,11 @@ class Home extends Component {
               <div className="row pl-5 pb-1 pt-1">
                 {topHeadlines &&
                   headlines.map((ele) => (
-                    <div className="row bg-light border-bottom" key={uuid()}>
-                      <img
-                        alt="..."
-                        src={ele.urlToImage}
-                        className="col-4 d-flex flex-column jstify-conent-center"
-                        style={{ height: "60px" }}
-                      />
-                      <div className="col-8">
-                        <a href={ele.url} rel="noopener noreferrer" target="_blank">
-                          <p
-                            className={`float-right text-justify ${style.newsTextSize}`}
-                          >
-                            {ele.title}
-                          </p>
-                        </a>
-                      </div>
-                    </div>
+                    <HomeSideBarNews
+                      urlToImage={ele.urlToImage}
+                      title={ele.title}
+                      url={ele.url}
+                    />
                   ))}
               </div>
             </div>
@@ -132,7 +125,7 @@ class Home extends Component {
             Technology
           </p>
           <div className="row">
-            <Carousel breakPoints={breakPoints} pagination={false} >
+            <Carousel breakPoints={breakPoints} pagination={false}>
               {technology &&
                 technology.map((ele) => (
                   <div className="p-1 col-12">
@@ -156,13 +149,13 @@ const mapStateToProps = (state) => ({
   topHeadlines: state.topHeadlines,
   loading: state.loading,
   business: state.business,
-  technology: state.technology
+  technology: state.technology,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getTopHeadlines: () => dispatch(getTopHeadlines()),
   businessNews: () => dispatch(businessNews()),
-  technologyNews: () => dispatch(technologyNews())
+  technologyNews: () => dispatch(technologyNews()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
