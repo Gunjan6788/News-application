@@ -1,9 +1,11 @@
 import {
   GET_TOP_HEADLINES_SUCCESS,
   GET_TOP_HEADLINES_REQUEST,
+  BUSINESS_NEWS
 } from "./actionTypes";
 import axios from "axios";
 
+// functions to get top headlines of home page
 export const getTopHeadlinesRequest = (payload) => {
   return {
     type: GET_TOP_HEADLINES_REQUEST,
@@ -27,5 +29,22 @@ export const getTopHeadlines = (payload) => (dispatch) => {
       "http://newsapi.org/v2/top-headlines?country=us&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43"
     )
     .then((res) => res.data)
-    .then((res) => dispatch(getTopHeadlinesSuccess(res.articles)));
+    .then((res) => dispatch(getTopHeadlinesSuccess(res.articles)))
+};
+
+//function to get business news
+export const businessNewsSuccess = (payload) => {
+  return {
+    type: BUSINESS_NEWS,
+    payload,
+  };
+};
+
+export const businessNews = () => (dispatch) => {
+  axios
+    .get(
+      "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43"
+    )
+    .then((res) => res.data)
+    .then((res) => dispatch(businessNewsSuccess(res.articles)));
 };

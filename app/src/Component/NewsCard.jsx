@@ -1,21 +1,24 @@
 import React from "react";
+import style from "./NewCard.module.css";
 
 export default function NewsCard(props) {
   let { title, url, urlToImage } = props;
 
   return (
-    <div class="col-11 col-lg-2">
-      <div class="card m-1" style={{ height: "25rem" }}>
+    <div>
+      <div class={`card ${style.card}`} style={{ height: "4rem" }}>
         <img
           src={urlToImage}
           class="card-img-top"
           alt="..."
-          style={{ height: "6rem" }}
+          style={{ height: "3rem" }}
         />
         <div class="card-body">
-          <a href={url} target="_blank">
-            <h5 class="card-title ">{title}</h5>
-          </a>
+          <small>
+            <a href={url} target="_blank">
+              {title}
+            </a>
+          </small>
         </div>
       </div>
     </div>

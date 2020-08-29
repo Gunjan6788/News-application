@@ -1,13 +1,16 @@
 import React from "react";
 import PublicRoutes from "./Routes/PublicRoutes";
 import Navbar from './Component/Navbar'
-import './App.css'
+import style from './App.module.css'
+import Footer from './Component/Footer'
 
 function App() {
   return (
-    <div className="background-color">
+    <div className={`${style.backgroundColor}`}>
       <Navbar/>
       <PublicRoutes />
+      <hr/>
+      <Footer/>
     </div>
   );
 }

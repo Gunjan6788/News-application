@@ -6,8 +6,7 @@ export default function PublicRouter(){
     return(
        <Switch>
           <Route exact path  = "/" render = {()=><Home/>}></Route>
-          {/* <Route exact path  = "/todo" render = {()=><Todo/>}></Route>
-          <Route exact path  = "/todo/edit/:id" render = {(props)=><Edit{...props}/>}></Route> */}
+          
        </Switch> 
 
     )
