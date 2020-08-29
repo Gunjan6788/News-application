@@ -1,7 +1,8 @@
 import {
   GET_TOP_HEADLINES_SUCCESS,
   GET_TOP_HEADLINES_REQUEST,
-  BUSINESS_NEWS
+  BUSINESS_NEWS,
+  TECHNOLOGY_NEWS
 } from "./actionTypes";
 import axios from "axios";
 
@@ -46,5 +47,22 @@ export const businessNews = () => (dispatch) => {
       "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43"
     )
     .then((res) => res.data)
-    .then((res) => dispatch(businessNewsSuccess(res.articles)));
+    .then((res) => dispatch(businessNewsSuccess(res.articles)))
 };
+
+//function to get technology news
+export const technologySuccess = (payload) => {
+    return {
+      type: TECHNOLOGY_NEWS,
+      payload,
+    };
+  };
+  
+  export const technologyNews = () => (dispatch) => {
+    axios
+      .get(
+        "http://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=59e8c0a2dd2e41c2b8c96a071a3d5c43"
+      )
+      .then((res) => res.data)
+      .then((res) => dispatch(technologySuccess(res.articles)));
+  };

@@ -2,11 +2,13 @@ import {
   GET_TOP_HEADLINES_REQUEST,
   GET_TOP_HEADLINES_SUCCESS,
   BUSINESS_NEWS,
+  TECHNOLOGY_NEWS,
 } from "./actionTypes";
 
 const initState = {
   topHeadlines: [],
   business: [],
+  technology: [],
   loading: false,
 };
 
@@ -29,6 +31,11 @@ const reducer = (state = initState, { type, payload }) => {
         ...state,
         business: payload,
       };
+    case TECHNOLOGY_NEWS:
+        return {
+            ...state,
+            technology: payload
+        }
     default:
       return state;
   }

@@ -1,20 +1,20 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 export default function Navbar() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <a className="navbar-brand mr-5 " href="#">
+          <a className="navbar-brand mr-5 " href="!#">
             News
           </a>
 
           <div className="navbar-collapse">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item mr-5">Home</li>
-              <li className="nav-item mr-5">Business</li>
-              <li className="nav-item mr-5">Sports</li>
-              <li className="nav-item mr-5">Technology</li>
+              <Link to="/"><li className="nav-item mr-5">Home</li></Link>
+              <Link to="/business"><li className="nav-item mr-5">Business</li></Link>
+              <Link to="/technology"><li className="nav-item mr-5">Technology</li></Link>
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <input

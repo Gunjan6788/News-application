@@ -1,31 +1,32 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getTopHeadlines, businessNews } from "../Redux/action";
+import { getTopHeadlines, businessNews, technologyNews } from "../Redux/action";
 import HeadingsCard from "../Component/HeadingsCard";
-import { uuid } from "uuidv4";
 import NewsCard from "../Component/NewsCard";
+import { uuid } from "uuidv4";
 import Carousel from "react-elastic-carousel";
-import "./Home.css";
+import style from "./Home.module.css";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
-  { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 6 },
+  { width: 768, itemsToShow: 4 },
+  { width: 1200, itemsToShow: 4 },
 ];
 
 class Home extends Component {
   componentDidMount() {
-    let { getTopHeadlines, businessNews } = this.props;
+    let { getTopHeadlines, businessNews, technologyNews } = this.props;
     getTopHeadlines();
     businessNews();
+    technologyNews()
   }
 
   render() {
-    const { topHeadlines, loading, business } = this.props;
+    const { topHeadlines, loading, business, technology } = this.props;
     let topThreeHeadings = topHeadlines && topHeadlines.slice(0, 2),
       otherHeadings = topHeadlines && topHeadlines.slice(3, 9),
-      headlines = topHeadlines && topHeadlines.slice(10, 17);
+      headlines = topHeadlines && topHeadlines.slice(10, 16);
 
     console.log(business);
 
@@ -34,7 +35,7 @@ class Home extends Component {
         <div className="container mt-3">
           <p className="font-weight-bolder bg-dark text-light pl-1">TOP NEWS</p>
           <div className="row">
-            <div className="col-8">
+            <div className="col-md-8 col-12">
               <div className="row">
                 {topHeadlines &&
                   topThreeHeadings.map((ele) => (
@@ -60,54 +61,88 @@ class Home extends Component {
                   ))}
               </div>
 
-              <p className="font-weight-bolder mt-4 bg-dark text-light pl-1">HEADLINES</p>
+              <p className="font-weight-bolder mt-4 bg-dark text-light pl-1">
+                HEADLINES
+              </p>
               <div className="row">
                 {topHeadlines &&
-                  otherHeadings.map((ele, i) => (
+                  otherHeadings.map((ele) => (
                     <div
                       className="col-lg-4 col-md-6 col-12 mb-3 border-bottom border-right"
                       key={uuid()}
                     >
-                      <p className="font-weight-lighter text-justify news-text-size mr-2">
-                        {ele.title}
-                      </p>
+                      <a href={ele.url} rel="noopener noreferrer" target="_blank">
+                        <p
+                          className={`font-weight-bolder text-justify mr-2 ${style.newsTextSize}`}
+                        >
+                          {ele.title}
+                        </p>
+                      </a>
                     </div>
                   ))}
               </div>
             </div>
 
-            <div className="col-4">
+            <div className="col-md-4 col-12">
               <div className="row pl-5 pb-1 pt-1">
                 {topHeadlines &&
                   headlines.map((ele) => (
                     <div className="row bg-light border-bottom" key={uuid()}>
                       <img
+                        alt="..."
                         src={ele.urlToImage}
                         className="col-4 d-flex flex-column jstify-conent-center"
                         style={{ height: "60px" }}
                       />
                       <div className="col-8">
-                        <p className="float-right text-justify news-text-size">
-                          {ele.title}
-                        </p>
+                        <a href={ele.url} rel="noopener noreferrer" target="_blank">
+                          <p
+                            className={`float-right text-justify ${style.newsTextSize}`}
+                          >
+                            {ele.title}
+                          </p>
+                        </a>
                       </div>
                     </div>
                   ))}
               </div>
             </div>
           </div>
-        
-          <p className="font-weight-bolder mt-4 bg-dark text-light pl-1">Business</p>
+
+          <p className="font-weight-bolder mt-4 bg-dark text-light pl-1">
+            Business
+          </p>
           <div className="row">
-            <Carousel breakPoints={breakPoints}>
+            <Carousel breakPoints={breakPoints} pagination={false}>
               {business &&
                 business.map((ele) => (
-                  <HeadingsCard
-                    key={uuid()}
-                    title={ele.title}
-                    url={ele.url}
-                    urlToImage={ele.urlToImage}
-                  />
+                  <div className="p-1 col-12">
+                    <NewsCard
+                      key={uuid()}
+                      title={ele.title}
+                      url={ele.url}
+                      urlToImage={ele.urlToImage}
+                    />
+                  </div>
+                ))}
+            </Carousel>
+          </div>
+
+          <p className="font-weight-bolder mt-4 bg-dark text-light pl-1">
+            Technology
+          </p>
+          <div className="row">
+            <Carousel breakPoints={breakPoints} pagination={false} >
+              {technology &&
+                technology.map((ele) => (
+                  <div className="p-1 col-12">
+                    <NewsCard
+                      key={uuid()}
+                      title={ele.title}
+                      url={ele.url}
+                      urlToImage={ele.urlToImage}
+                    />
+                  </div>
                 ))}
             </Carousel>
           </div>
@@ -121,11 +156,13 @@ const mapStateToProps = (state) => ({
   topHeadlines: state.topHeadlines,
   loading: state.loading,
   business: state.business,
+  technology: state.technology
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getTopHeadlines: () => dispatch(getTopHeadlines()),
   businessNews: () => dispatch(businessNews()),
+  technologyNews: () => dispatch(technologyNews())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

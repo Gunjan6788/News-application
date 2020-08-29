@@ -1,7 +1,8 @@
 import React from "react";
+import style from './HeadingsCard.module.css'
 
 export default function HeadingsCard(props) {
-  let { title, description, url, urlToImage } = props;
+  let { title, url, urlToImage } = props;
   console.log(url);
   return (
     <div className="col-11 col-lg-6">
@@ -12,13 +13,10 @@ export default function HeadingsCard(props) {
           alt="..."
           style={{ height: "10rem" }}
         />
-        {/* <div className="card-img-overlay d-flex flex-column justify-content-center">
-          <a href={url} target="_blank">
-            <h5 className="card-title ">{title}</h5>
-          </a>
-        </div> */}
         <div className="card-body">
-          <p className="card-text">{title}</p>
+          <a href={url} rel="noopener noreferrer" target="_blank">
+            <h5 className={`${style.cardHeading}`}>{title}</h5>
+          </a>
         </div>
       </div>
     </div>
