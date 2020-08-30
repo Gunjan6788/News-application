@@ -15,14 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url
-from django.urls import path, include
+from django.urls import path, include, re_path
 
-from core.views import home
-from core.views import top_headlines
+from core.views import (
+    home,
+    top_headlines,
+    search_news
+)
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home_page'),
-    url(r'^top_headlines$', top_headlines, name='news_headlines'),
+    re_path(r'^top_headlines/?$', top_headlines, name='news_headlines'),
+    re_path(r'^everything/?$', search_news, name='search_news')
 ]
