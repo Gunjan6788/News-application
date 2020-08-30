@@ -4,6 +4,7 @@ import {
   BUSINESS_NEWS,
   TECHNOLOGY_NEWS,
   SEARCH_NEWS,
+  SELECTED_SOURCE,
 } from "./actionTypes";
 
 const initState = {
@@ -11,7 +12,7 @@ const initState = {
   business: [],
   technology: [],
   loading: false,
-  searchItems:[]
+  searchItems: [],
 };
 
 const reducer = (state = initState, { type, payload }) => {
@@ -41,7 +42,12 @@ const reducer = (state = initState, { type, payload }) => {
     case SEARCH_NEWS:
       return {
         ...state,
-        searchItems:payload
+        searchItems: payload,
+      };
+    case SELECTED_SOURCE:
+      return {
+        ...state,
+        searchItems: payload,
       };
     default:
       return state;

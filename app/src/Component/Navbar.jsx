@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { searchNews } from "../Redux/action";
+import { searchNews, selectedSource } from "../Redux/action";
 import moment from "moment";
 
 class Navbar extends Component {
@@ -10,6 +10,7 @@ class Navbar extends Component {
 
     this.state = {
       value: "",
+      selectValue: "",
     };
   }
 
@@ -20,21 +21,29 @@ class Navbar extends Component {
   };
 
   handleSubmit = () => {
-      const {searchNews} = this.props
-      const {value} = this.state
-      let date = new Date()
-      date = moment(date).format('YYYY-MM-DD');
-      searchNews(value, date)
+    const { searchNews } = this.props;
+    const { value } = this.state;
+    let date = new Date();
+    date = moment(date).format("YYYY-MM-DD");
+    searchNews(value, date);
+  };
+
+  handleSelectChange = (e) => {
+    const { selectedSource } = this.props;
+    selectedSource(e.target.value);
   };
 
   render() {
-    let { value } = this.state;
+    let { value, selectValue } = this.state;
 
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container">
-            <p className="navbar-brand mr-5 border rounded-circle p-1" href="!#">
+            <p
+              className="navbar-brand mr-5 border rounded-circle p-1"
+              href="!#"
+            >
               News
             </p>
 
@@ -50,9 +59,7 @@ class Navbar extends Component {
                   <li className="nav-item mr-5">Technology</li>
                 </Link>
               </ul>
-              <form
-                className="form-inline my-2 my-lg-0"
-              >
+              <form className="form-inline my-2 my-lg-0">
                 <input
                   className="form-control mr-sm-2"
                   type="search"
@@ -61,14 +68,28 @@ class Navbar extends Component {
                   value={value}
                   onChange={this.handleChange}
                 />
-                <Link to="/SearchNews">
+                <Link to="/searchNews">
                   <button
-                    className="btn btn-outline-light my-2 my-sm-0"
+                    className="btn btn-outline-light my-2 my-sm-0 mr-5"
                     type="submit"
                     onClick={this.handleSubmit}
                   >
                     Search
                   </button>
+                </Link>
+                <Link to="/searchNews">
+                  <select
+                    class="custom-select mt-sm-3 mt-md-0"
+                    value={selectValue}
+                    onChange={this.handleSelectChange}
+                  >
+                    <option selected>See top news source</option>
+                    <option value="techcrunch">techcrunch</option>
+                    <option value="bloomberg">Bloomberg</option>
+                    <option value="CNBC">CNBC</option>
+                    <option value="abc-news">ABC News</option>
+                    <option value="google-news">Google News</option>
+                  </select>
                 </Link>
               </form>
             </div>
@@ -87,7 +108,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  searchNews: (value,date) => dispatch(searchNews(value,date)),
+  searchNews: (value, date) => dispatch(searchNews(value, date)),
+  selectedSource: (payload) => dispatch(selectedSource(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

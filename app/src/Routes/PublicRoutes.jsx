@@ -9,10 +9,10 @@ import SearchNews from "../RouterComponent/SearchNews";
 export default function PublicRouter() {
   return (
     <Switch>
-      <Route exact path="/" render={() => <Home />}></Route>
+      <Route exact path="/" render={(props) => <Home {...props}/>}></Route>
       <Route path="/business" render={() => <Business />}></Route>
       <Route path="/technology" render={() => <Technology />}></Route>
-      <Route path="/SearchNews" render={() => <SearchNews />}></Route>
+      <Route path="/searchNews" render={(props) => <SearchNews />}></Route>
     </Switch>
   );
 }
