@@ -9,7 +9,7 @@ This project was created with React[Create React App](https://github.com/faceboo
 - [Frontend React App](#frontend-react-app)
 - [Backend Django Server](#backend-django-server)
 - [Note](#note)
-- [Dependecies Used In client](dependecies-used-in-client)
+- [Dependecies Used In Client](dependecies-used-in-client)
 
 
 ## Features
@@ -89,7 +89,7 @@ python3 manage.py runserver
 - After running django server, if needed change the localhost api in the client redux/action.
 
 
-## Dependecies used in the client
+## Dependecies Used In Client
 
 1. react-elastic-carousel
 2. axios
