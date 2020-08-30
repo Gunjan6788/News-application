@@ -3,10 +3,10 @@ import style from "./newsCard.module.css";
 
 export default function NewsCard(props) {
   let { title, url, urlToImage, date } = props;
-  console.log(date)
+  console.log(date);
   return (
     <div
-      className="card m-1 mb-2"
+      className="card m-1 mb-2 overflow-hidden"
       style={date ? { height: "20rem" } : { height: "16rem" }}
     >
       <img
@@ -22,12 +22,13 @@ export default function NewsCard(props) {
           </p>
         </a>
       </div>
-          {
-            date && 
+      {date && (
         <div className="card-footer">
-              <small className="text-seconday">- {date}</small>
+          <small className="text-seconday">
+            - {date < 10 ? date.slice(1, 2) : date} hours ago ...
+          </small>
         </div>
-          }
+      )}
     </div>
   );
 }

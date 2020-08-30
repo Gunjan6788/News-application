@@ -34,7 +34,7 @@ export class Pagination extends Component {
 
     return (
       <div>
-        <nav aria-label="...">
+        <nav >
           <ul className="pagination">
             <li className="page-item">
               <button
