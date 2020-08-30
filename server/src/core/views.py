@@ -2,27 +2,28 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 import requests
-
+from config import API_KEY
 
 def home(request):
     data = {
-        "home": "home page"
+        'home': 'home page'
     }
     return JsonResponse(data)
 
 
+# This api is used to send the top headlines
+# It is scraping the news headlines from newsapi
 def top_headlines(request):
     try:
         country = request.GET['country']
         category = request.GET['category']
-        # return JsonResponse(country, safe=False)
         url = 'http://newsapi.org/v2/top-headlines'
-        headers = {"Accept": "application/json"}
+        headers = {'Accept': 'application/json'}
 
         payload = {
-            "country": country,
-            "category": category,
-            "apiKey": "59e8c0a2dd2e41c2b8c96a071a3d5c43"
+            'country': country,
+            'category': category,
+            'apiKey': API_KEY
         }
         req = requests.get(url, params=payload, headers=headers)
         data = req.json()
@@ -32,19 +33,21 @@ def top_headlines(request):
         return json.dumps({'error': True, 'message': format(err)})
 
 
+# This api is used to send for any query search
+# It is also scraping the searched news from newsapi
 def search_news(request):
     try:
-        q = request.GET['q']
+        query = request.GET['q']
         from_date = request.GET['from']
 
         url = 'http://newsapi.org/v2/everything'
-        headers = {"Accept": "application/json"}
+        headers = {'Accept': 'application/json'}
 
         payload = {
-            "q": q,
-            "from": from_date,
-            "sortBy": "publishedAt",
-            "apiKey": "59e8c0a2dd2e41c2b8c96a071a3d5c43"
+            'q': query,
+            'from': from_date,
+            'sortBy': 'publishedAt',
+            'apiKey': API_KEY
         }
         req = requests.get(url, params=payload, headers=headers)
         data = req.json()

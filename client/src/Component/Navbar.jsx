@@ -30,6 +30,9 @@ class Navbar extends Component {
 
   handleSelectChange = (e) => {
     const { selectedSource } = this.props;
+    this.setState({
+      selectValue:e.target.value
+    })
     selectedSource(e.target.value);
   };
 
@@ -83,7 +86,7 @@ class Navbar extends Component {
                     value={selectValue}
                     onChange={this.handleSelectChange}
                   >
-                    <option defaultValue>See top news source</option>
+                    <option defaultValue>Top news sources</option>
                     <option value="techcrunch">techcrunch</option>
                     <option value="bloomberg">Bloomberg</option>
                     <option value="CNBC">CNBC</option>
