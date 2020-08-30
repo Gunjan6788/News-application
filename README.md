@@ -3,7 +3,7 @@ This project was created with React[Create React App](https://github.com/faceboo
 # News Application
 
 
-## Table of Contents
+## Content
 - [Features](#features)
 - [Tools Used](#tools-used)
 - [Frontend React App](#frontend-react-app)
