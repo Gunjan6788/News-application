@@ -25,7 +25,6 @@ export const getTopHeadlinesSuccess = (payload) => {
 
 export const getTopHeadlines = (payload) => (dispatch) => {
   dispatch(getTopHeadlinesRequest(payload));
-  console.log(payload);
 
   axios
     .get(

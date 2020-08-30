@@ -50,13 +50,13 @@ class Navbar extends Component {
             <div className="navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <Link to="/">
-                  <li className="nav-item mr-5">Home</li>
+                  <li className="nav-item mr-5 text-light">Home</li>
                 </Link>
                 <Link to="/business">
-                  <li className="nav-item mr-5">Business</li>
+                  <li className="nav-item mr-5 text-light">Business</li>
                 </Link>
                 <Link to="/technology">
-                  <li className="nav-item mr-5">Technology</li>
+                  <li className="nav-item mr-5 text-light">Technology</li>
                 </Link>
               </ul>
               <form className="form-inline my-2 my-lg-0">
@@ -79,11 +79,11 @@ class Navbar extends Component {
                 </Link>
                 <Link to="/searchNews">
                   <select
-                    class="custom-select mt-sm-3 mt-md-0"
+                    className="custom-select mt-sm-3 mt-md-0"
                     value={selectValue}
                     onChange={this.handleSelectChange}
                   >
-                    <option selected>See top news source</option>
+                    <option defaultValue>See top news source</option>
                     <option value="techcrunch">techcrunch</option>
                     <option value="bloomberg">Bloomberg</option>
                     <option value="CNBC">CNBC</option>

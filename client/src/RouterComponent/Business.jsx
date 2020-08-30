@@ -29,7 +29,6 @@ class Business extends Component {
       end_index = curr_page * per_page - 1;
 
     let currData = business.slice(start_index, end_index + 1);
-    console.log(currData);
 
     return (
       <>

@@ -3,7 +3,7 @@ import style from './HeadingsCard.module.css'
 
 export default function HeadingsCard(props) {
   let { title, url, urlToImage } = props;
-  console.log(url);
+  
   return (
     <div className="col-11 col-lg-6">
       <div className="card " style={{ height: "18rem" }}>

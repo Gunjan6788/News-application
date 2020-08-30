@@ -29,8 +29,6 @@ class Home extends Component {
       otherHeadings = topHeadlines && topHeadlines.slice(3, 9),
       headlines = topHeadlines && topHeadlines.slice(10, 16);
 
-    console.log(business);
-
     return (
       <>
         <div className="container mt-3">
@@ -93,6 +91,7 @@ class Home extends Component {
                 {topHeadlines &&
                   headlines.map((ele) => (
                     <HomeSideBarNews
+                      key={uuid()}
                       urlToImage={ele.urlToImage}
                       title={ele.title}
                       url={ele.url}
@@ -109,9 +108,8 @@ class Home extends Component {
             <Carousel breakPoints={breakPoints} pagination={false}>
               {business &&
                 business.map((ele) => (
-                  <div className="p-1 col-12">
+                  <div className="p-1 col-12" key={uuid()}>
                     <NewsCard
-                      key={uuid()}
                       title={ele.title}
                       url={ele.url}
                       urlToImage={ele.urlToImage}
@@ -128,9 +126,8 @@ class Home extends Component {
             <Carousel breakPoints={breakPoints} pagination={false}>
               {technology &&
                 technology.map((ele) => (
-                  <div className="p-1 col-12">
+                  <div className="p-1 col-12" key={uuid()}>
                     <NewsCard
-                      key={uuid()}
                       title={ele.title}
                       url={ele.url}
                       urlToImage={ele.urlToImage}

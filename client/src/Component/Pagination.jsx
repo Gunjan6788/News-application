@@ -24,11 +24,11 @@ export class Pagination extends Component {
     const { business } = this.props;
     let { currPage } = this.state;
 
-    let per_page = 8,
-      total_page = Math.ceil(business.length / per_page),
+    let perPage = 8,
+      totalPage = Math.ceil(business.length / perPage),
       arr = [];
 
-    for (let i = 1; i <= total_page; i++) {
+    for (let i = 1; i <= totalPage; i++) {
       arr.push(i);
     }
 
@@ -67,7 +67,7 @@ export class Pagination extends Component {
                 className="page-link"
                 onClick={() =>
                   this.handleClick(
-                    currPage < total_page ? currPage + 1 : total_page
+                    currPage < totalPage ? currPage + 1 : totalPage
                   )
                 }
               >

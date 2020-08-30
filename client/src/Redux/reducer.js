@@ -16,7 +16,6 @@ const initState = {
 };
 
 const reducer = (state = initState, { type, payload }) => {
-  console.log(payload);
   switch (type) {
     case GET_TOP_HEADLINES_REQUEST:
       return {

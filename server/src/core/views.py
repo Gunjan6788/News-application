@@ -19,11 +19,11 @@ def top_headlines(request):
     headers = {"Accept": "application/json"}
 
     payload = {
-        "country":country,
-        "category":category,
+        "country": country,
+        "category": category,
         "apiKey": "59e8c0a2dd2e41c2b8c96a071a3d5c43"
     }
-    req = requests.get(url, params=payload, headers=headers )
+    req = requests.get(url, params=payload, headers=headers)
     data = req.json()
 
     return JsonResponse(data)
@@ -37,12 +37,12 @@ def search_news(request):
     headers = {"Accept": "application/json"}
 
     payload = {
-        "q":q,
-        "from":from_date,
-        "sortBy":"publishedAt",
+        "q": q,
+        "from": from_date,
+        "sortBy": "publishedAt",
         "apiKey": "59e8c0a2dd2e41c2b8c96a071a3d5c43"
     }
-    req = requests.get(url, params=payload, headers=headers )
+    req = requests.get(url, params=payload, headers=headers)
     data = req.json()
 
     return JsonResponse(data)

@@ -3,7 +3,7 @@ import style from "./newsCard.module.css";
 
 export default function NewsCard(props) {
   let { title, url, urlToImage, date } = props;
-  console.log(date);
+
   return (
     <div
       className="card m-1 mb-2 overflow-hidden"

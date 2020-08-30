@@ -12,7 +12,7 @@ export default function PublicRouter() {
       <Route exact path="/" render={(props) => <Home {...props}/>}></Route>
       <Route path="/business" render={() => <Business />}></Route>
       <Route path="/technology" render={() => <Technology />}></Route>
-      <Route path="/searchNews" render={(props) => <SearchNews />}></Route>
+      <Route path="/searchNews" render={() => <SearchNews />}></Route>
     </Switch>
   );
 }
